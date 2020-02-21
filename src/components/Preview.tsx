@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useRef } from 'react'
+import { useCapture } from 'react-capture'
 import styled, { css } from 'styled-components'
 
-import { downloadAsImage } from '../helpers'
 import { ThemeList } from '../themes'
 
 const baseFont = css`
@@ -58,16 +58,16 @@ export interface PreviewProps {
 }
 
 export const Preview: React.FC<PreviewProps> = ({ title, width, height, theme, data }) => {
+  const { snap } = useCapture()
+
   const previewRef = useRef<HTMLDivElement>(null)
 
   const View = ThemeList[theme].Preview
   const ViewDefaults = ThemeList[theme].Config.default
 
   const onClick = useCallback(() => {
-    if (previewRef.current) {
-      downloadAsImage(previewRef.current)
-    }
-  }, [previewRef])
+    snap(previewRef, { file: 'splash.png' })
+  }, [previewRef, snap])
 
   return (
     <Fragment>

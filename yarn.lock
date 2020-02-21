@@ -9002,6 +9002,13 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-capture@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-capture/-/react-capture-0.3.1.tgz#49e2178768089632d07b4bc7e886ffe72834ee8f"
+  integrity sha512-hrradOT7D/7DgWrOsD0zw1/p+FClLPeH6vm9ixeh3jKazhpg8p2N0/upVnanMRqK60Tb/RwcBrXpgC5RVybFCA==
+  dependencies:
+    html2canvas "^1.0.0-rc.5"
+
 react-dev-utils@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.1.0.tgz#ccf82135f6dc2fc91969bc729ce57a69d8e86025"
