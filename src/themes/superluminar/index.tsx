@@ -25,11 +25,11 @@ const Theme: React.FC<ThemeProps> = ({ title, author }) => (
 export const Config: ThemeConfig = {
   name: 'superluminar (default, author)',
   default: {
-    title: 'React SPA und server-side rendering mit AWS Lambda and CloudFront',
+    title: 'Build a continuous snack delivery pipeline with AWS DeepSnack 🚀',
     author: {
-      name: 'Sebastian Müller',
-      description: 'AWS Serverless Hero, Certified Solutions Architect, and Senior Cloud Consultant',
-      image: 'https://superluminar.io/images/team/sebastian-mueller.jpg'
+      name: 'Anthony R. Curtis',
+      description: 'AWS DeepDog Expert, former snack collector, and Chief Snack Officer',
+      image: 'https://superluminar.io/images/team/example.jpg'
     }
   },
   fields: [
