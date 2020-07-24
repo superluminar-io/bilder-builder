@@ -5,8 +5,10 @@ import * as S3Deployment from '@aws-cdk/aws-s3-deployment'
 const path = './build'
 
 export class StorageStack extends CDK.Stack {
-  constructor(app: CDK.App, id: string, props?: CDK.StackProps) {
-    super(app, id, props)
+  public readonly bucketDomain: CDK.CfnOutput
+
+  constructor(scope: CDK.Construct, id: string, props?: CDK.StackProps) {
+    super(scope, id, props)
 
     const bucket = new S3.Bucket(this, 'Files', {
       websiteIndexDocument: 'index.html',
@@ -18,7 +20,7 @@ export class StorageStack extends CDK.Stack {
       destinationBucket: bucket
     })
 
-    new CDK.CfnOutput(this, 'BucketDomain', {
+    this.bucketDomain = new CDK.CfnOutput(this, 'BucketDomain', {
       value: bucket.bucketWebsiteDomainName
     })
   }

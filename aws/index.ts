@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-import 'source-map-support/register'
+import { App } from '@aws-cdk/core'
+import { BilderBuilderPipelineStack } from './stacks/Pipeline'
 
-import * as CDK from '@aws-cdk/core'
-import { StorageStack } from './stacks/Storage'
+const app = new App()
 
-const app = new CDK.App()
-const env = { region: 'eu-central-1' }
+new BilderBuilderPipelineStack(app, 'BilderBuilderPipelineStack')
 
-new StorageStack(app, 'Storage', { env, stackName: 'bilder-builder' })
+app.synth()

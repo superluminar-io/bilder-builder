@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.12.0",
-    "react-capture": "0.3.1",
+    "react-capture": "^0.3.1",
     "react-dom": "^16.12.0",
     "styled-components": "^5.0.1"
   },
@@ -31,9 +31,15 @@
     ]
   },
   "devDependencies": {
-    "@aws-cdk/aws-s3": "^1.24.0",
+    "@aws-cdk/aws-codebuild": "^1.54.0",
+    "@aws-cdk/aws-codecommit": "^1.54.0",
+    "@aws-cdk/aws-codedeploy": "^1.54.0",
+    "@aws-cdk/aws-codepipeline": "^1.54.0",
+    "@aws-cdk/aws-codepipeline-actions": "^1.54.0",
+    "@aws-cdk/aws-s3": "^1.54.0",
     "@aws-cdk/aws-s3-deployment": "^1.24.0",
     "@aws-cdk/core": "^1.24.0",
+    "@aws-cdk/pipelines": "^1.54.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -43,7 +49,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "^4.4.2",
     "aws-cdk": "^1.24.0",
-    "react-scripts": "3.3.1",
-    "typescript": "~3.7.2"
+    "react-scripts": "^3.3.1",
+    "typescript": "^3.7.2"
   }
 }
