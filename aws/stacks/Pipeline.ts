@@ -26,8 +26,7 @@ export class BilderBuilderPipelineStack extends Stack {
         output: sourceArtifact,
         oauthToken: SecretValue.secretsManager('github-token'),
         owner: 'superluminar-io',
-        repo: 'bilder-builder',
-        trigger: codepipeline_actions.GitHubTrigger.POLL
+        repo: 'bilder-builder'
       }),
 
       // How it will be built and synthesized
