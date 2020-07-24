@@ -18,9 +18,18 @@ $ > yarn start
 
 ## Deployment
 
+*Only* before first deploy bootstrap the AWS Account for CDK
+
 ```bash
 # Bootstrap AWS account for CDK usage
 $ > yarn cdk bootstrap --region eu-central-1
+```
+
+Then everytime for deployments:
+
+```bash
+# Build the project
+$ > yarn build
 
 # Deploy CloudFormation Stack
 $ > yarn cdk deploy
