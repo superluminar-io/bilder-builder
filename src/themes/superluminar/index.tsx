@@ -72,6 +72,11 @@ export const Config: ThemeConfig = {
           name: 'Till Kahlbrock',
           image: 'https://superluminar.io/images/team/till-kahlbrock.jpg',
           description: 'AWS Certified DevOps Engineer - Professional and Senior Cloud Consultant'
+        },
+        {
+          name: 'Alexander Schramm',
+          image: 'https://superluminar.io/images/team/alexander-schramm.jpg',
+          description: 'GCP Certified Professional Cloud Architect and Cloud Consultant'
         }
       ]
     }
