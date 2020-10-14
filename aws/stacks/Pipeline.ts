@@ -3,7 +3,7 @@ import * as CodepipelineActions from '@aws-cdk/aws-codepipeline-actions'
 import * as CodeBuild from '@aws-cdk/aws-codebuild'
 import * as S3 from '@aws-cdk/aws-s3'
 import { CfnOutput, Construct, SecretValue, Stack, StackProps } from '@aws-cdk/core'
-import { CdkPipeline } from '@aws-cdk/pipelines'
+import { CdkPipeline, SimpleSynthAction } from '@aws-cdk/pipelines'
 
 /**
  * The stack that defines the application pipeline
@@ -35,9 +35,13 @@ export class BilderBuilderPipelineStack extends Stack {
         oauthToken: SecretValue.secretsManager('github-token'),
         owner: 'superluminar-io',
         repo: 'bilder-builder'
+      }),
+
+      synthAction: SimpleSynthAction.standardYarnSynth({
+        sourceArtifact,
+        cloudAssemblyArtifact
       })
     })
-
 
     const buildStage = pipeline.addStage('BuildBilderBuilderStage')
 
@@ -47,7 +51,7 @@ export class BilderBuilderPipelineStack extends Stack {
         outputs: [buildArtifact],
         actionName: 'Build',
         project: new CodeBuild.PipelineProject(this, 'BuildBilderBuilderProject', {
-          projectName: 'BuildBilderBuilderProject',
+          projectName: 'BuildBilderBuilderProject'
         })
       })
     )
@@ -60,7 +64,6 @@ export class BilderBuilderPipelineStack extends Stack {
         input: buildArtifact,
         bucket: websiteBucket
       })
-
     )
 
     this.bucketDomain = new CfnOutput(this, 'BucketDomain', {
