@@ -1,23 +1,20 @@
 import * as Codepipeline from '@aws-cdk/aws-codepipeline'
 import * as CodepipelineActions from '@aws-cdk/aws-codepipeline-actions'
-import * as CodeBuild from '@aws-cdk/aws-codebuild'
-import * as S3 from '@aws-cdk/aws-s3'
 import { CfnOutput, Construct, SecretValue, Stack, StackProps } from '@aws-cdk/core'
 import { CdkPipeline, SimpleSynthAction } from '@aws-cdk/pipelines'
+import * as CodeBuild from '@aws-cdk/aws-codebuild'
+import { Bucket } from '@aws-cdk/aws-s3'
+
+import { BilderBuilderStage } from '../stages/BilderBuilder'
 
 /**
  * The stack that defines the application pipeline
  */
 export class BilderBuilderPipelineStack extends Stack {
-  public readonly bucketDomain: CfnOutput
+  readonly targetDomain = 'bilderbuilder.superluminar.io'
 
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
-
-    const websiteBucket = new S3.Bucket(this, 'Files', {
-      websiteIndexDocument: 'index.html',
-      publicReadAccess: true
-    })
 
     const sourceArtifact = new Codepipeline.Artifact()
     const buildArtifact = new Codepipeline.Artifact()
@@ -43,31 +40,46 @@ export class BilderBuilderPipelineStack extends Stack {
       })
     })
 
-    const buildStage = pipeline.addStage('BuildBilderBuilderStage')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const bilderBuilderStage = new BilderBuilderStage(this, 'BilderBuilderInfraStage', { bucketName: this.targetDomain, ...props })
 
-    buildStage.addActions(
-      new CodepipelineActions.CodeBuildAction({
-        input: sourceArtifact,
-        outputs: [buildArtifact],
-        actionName: 'Build',
-        project: new CodeBuild.PipelineProject(this, 'BuildBilderBuilderProject', {
-          projectName: 'BuildBilderBuilderProject'
-        })
-      })
+    pipeline.addApplicationStage(bilderBuilderStage)
+
+    const buildAndDeployStage = pipeline.addStage('BuildAndDeploy')
+
+    buildAndDeployStage.addActions(
+      this.buildAction(sourceArtifact, buildArtifact, buildAndDeployStage.nextSequentialRunOrder()),
+      this.deployAction(buildArtifact, this.targetDomain, buildAndDeployStage.nextSequentialRunOrder())
     )
 
-    const deployStage = pipeline.addStage('DeployBilderBuilderStage')
+    new CfnOutput(this, 'BucketDomain', {
+      value: this.targetDomain
+    })
+  }
 
-    deployStage.addActions(
-      new CodepipelineActions.S3DeployAction({
-        actionName: 'Deploy',
-        input: buildArtifact,
-        bucket: websiteBucket
+  private buildAction(
+    sourceArtifact: Codepipeline.Artifact,
+    buildArtifact: Codepipeline.Artifact,
+    runOrder: number
+  ): CodepipelineActions.CodeBuildAction {
+    return new CodepipelineActions.CodeBuildAction({
+      input: sourceArtifact,
+      outputs: [buildArtifact],
+      runOrder: runOrder,
+      actionName: 'Build',
+      project: new CodeBuild.PipelineProject(this, 'BuildBilderBuilderProject', {
+        projectName: 'BuildBilderBuilderProject'
       })
-    )
+    })
+  }
 
-    this.bucketDomain = new CfnOutput(this, 'BucketDomain', {
-      value: websiteBucket.bucketWebsiteDomainName
+  private deployAction(input: Codepipeline.Artifact, bucketName: string, runOrder: number): CodepipelineActions.S3DeployAction {
+    const bucket = Bucket.fromBucketName(this, 'WebsiteBucket', bucketName)
+    return new CodepipelineActions.S3DeployAction({
+      actionName: 'Deploy',
+      runOrder: runOrder,
+      input: input,
+      bucket: bucket
     })
   }
 }
