@@ -27,6 +27,7 @@ export class WebsiteStack extends Stack {
 
     const certificate = new DnsValidatedCertificate(this, 'WebsiteCert', {
       domainName: props.domainName,
+      region: 'us-east-1',
       hostedZone: zone
     })
 
