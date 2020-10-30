@@ -1,5 +1,5 @@
 import { Stack, CfnOutput, Construct, StackProps } from '@aws-cdk/core'
-import * as S3 from '@aws-cdk/aws-s3'
+import { Bucket, BlockPublicAccess } from '@aws-cdk/aws-s3'
 import { Distribution, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront'
 import { S3Origin } from '@aws-cdk/aws-cloudfront-origins'
 import { DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager'
@@ -21,8 +21,9 @@ export class WebsiteStack extends Stack {
       hostedZoneId: this.hostedZoneId
     })
 
-    const bucket = new S3.Bucket(this, 'WebsiteBucket', {
-      bucketName: props.domainName
+    const bucket = new Bucket(this, 'WebsiteBucket', {
+      bucketName: props.domainName,
+      blockPublicAccess: BlockPublicAccess.BLOCK_ALL
     })
 
     const certificate = new DnsValidatedCertificate(this, 'WebsiteCert', {

@@ -2,7 +2,7 @@
 
 > Create images for OpenGraph meta tags.
 >
-> http://bilderbuilder.superluminar.io.s3-website.eu-central-1.amazonaws.com/
+> https://bilderbuilder.superluminar.io
 
 ![Bilder Builder](screenshot.png)
 
