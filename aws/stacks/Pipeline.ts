@@ -11,7 +11,7 @@ import { BilderBuilderStage } from '../stages/BilderBuilder'
  * The stack that defines the application pipeline
  */
 export class BilderBuilderPipelineStack extends Stack {
-  readonly targetDomain = 'bilderbuilder.superluminar.io'
+  readonly domainName = 'bilderbuilder.superluminar.io'
 
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
@@ -41,7 +41,7 @@ export class BilderBuilderPipelineStack extends Stack {
     })
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const bilderBuilderStage = new BilderBuilderStage(this, 'BilderBuilderInfraStage', { bucketName: this.targetDomain, ...props })
+    const bilderBuilderStage = new BilderBuilderStage(this, 'BilderBuilderInfraStage', { domainName: this.domainName, ...props })
 
     pipeline.addApplicationStage(bilderBuilderStage)
 
@@ -49,11 +49,11 @@ export class BilderBuilderPipelineStack extends Stack {
 
     buildAndDeployStage.addActions(
       this.buildAction(sourceArtifact, buildArtifact, buildAndDeployStage.nextSequentialRunOrder()),
-      this.deployAction(buildArtifact, this.targetDomain, buildAndDeployStage.nextSequentialRunOrder())
+      this.deployAction(buildArtifact, this.domainName, buildAndDeployStage.nextSequentialRunOrder())
     )
 
-    new CfnOutput(this, 'BucketDomain', {
-      value: this.targetDomain
+    new CfnOutput(this, 'DomainName', {
+      value: this.domainName
     })
   }
 
