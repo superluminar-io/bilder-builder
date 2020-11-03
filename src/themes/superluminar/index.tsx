@@ -74,9 +74,9 @@ export const Config: ThemeConfig = {
           description: 'AWS Certified DevOps Engineer - Professional and Senior Cloud Consultant'
         },
         {
-          name: 'Alexander Schramm',
-          image: 'https://superluminar.io/images/team/alexander-schramm.jpg',
-          description: 'GCP Certified Professional Cloud Architect, AWS Certified Solutions Architect and Developer Associate, and Cloud Consultant'
+          name: 'Alexander Steppke',
+          image: 'https://superluminar.io/images/team/alexander-steppke.jpg',
+          description: 'GCP Certified Professional Cloud Architect, AWS Certified Solutions Architect, Developer Associate and SysOps Administrator, and Cloud Consultant'
         },
         {
           name: 'Henrik Fricke',
