@@ -68,9 +68,9 @@ export class BilderBuilderPipelineStack extends Stack {
       detailType: 'FULL',
       eventTypeIds: [
         'codebuild-project-build-state-succeeded',
-        'project-build-state-failed',
-        'project-build-state-in-progress',
-        'project-build-state-stopped'
+        'codebuild-project-build-state-failed',
+        'codebuild-project-build-state-in-progress',
+        'codebuild-project-build-state-stopped'
       ],
       targets: [{ targetType: 'AWSChatbotSlack', targetAddress: slackChannel.slackChannelConfigurationArn }],
       resource: buildProject.projectArn
