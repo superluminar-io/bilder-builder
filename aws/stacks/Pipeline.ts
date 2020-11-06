@@ -49,11 +49,8 @@ export class BilderBuilderPipelineStack extends Stack {
 
     const buildAndDeployStage = pipeline.addStage('BuildAndDeploy')
 
-    const buildProject = this.buildProject()
-    const buildAction = this.buildAction(sourceArtifact, buildArtifact, buildProject, buildAndDeployStage.nextSequentialRunOrder())
-
     buildAndDeployStage.addActions(
-      buildAction,
+      this.buildAction(sourceArtifact, buildArtifact, buildAndDeployStage.nextSequentialRunOrder()),
       this.deployAction(buildArtifact, this.domainName, buildAndDeployStage.nextSequentialRunOrder())
     )
 
@@ -64,16 +61,18 @@ export class BilderBuilderPipelineStack extends Stack {
     })
 
     new CfnNotificationRule(this, 'NotifySlack', {
-      name: 'bilderbuilder-pipelinte-notifications',
+      name: 'bilderbuilder-pipeline-notifications',
       detailType: 'FULL',
       eventTypeIds: [
-        'codebuild-project-build-state-succeeded',
-        'codebuild-project-build-state-failed',
-        'codebuild-project-build-state-in-progress',
-        'codebuild-project-build-state-stopped'
+        'codepipeline-pipeline-pipeline-execution-failed',
+        'codepipeline-pipeline-pipeline-execution-canceled',
+        'codepipeline-pipeline-pipeline-execution-started',
+        'codepipeline-pipeline-pipeline-execution-resumed',
+        'codepipeline-pipeline-pipeline-execution-succeeded',
+        'codepipeline-pipeline-pipeline-execution-superseded'
       ],
       targets: [{ targetType: 'AWSChatbotSlack', targetAddress: slackChannel.slackChannelConfigurationArn }],
-      resource: buildProject.projectArn
+      resource: pipeline.codePipeline.pipelineArn
     })
 
     new CfnOutput(this, 'DomainName', {
@@ -81,16 +80,9 @@ export class BilderBuilderPipelineStack extends Stack {
     })
   }
 
-  private buildProject() {
-    return new CodeBuild.PipelineProject(this, 'BuildBilderBuilderProject', {
-      projectName: 'BuildBilderBuilderProject'
-    })
-  }
-
   private buildAction(
     sourceArtifact: Codepipeline.Artifact,
     buildArtifact: Codepipeline.Artifact,
-    buildProject: CodeBuild.Project,
     runOrder: number
   ): CodepipelineActions.CodeBuildAction {
     return new CodepipelineActions.CodeBuildAction({
@@ -98,7 +90,9 @@ export class BilderBuilderPipelineStack extends Stack {
       outputs: [buildArtifact],
       runOrder: runOrder,
       actionName: 'Build',
-      project: buildProject
+      project: new CodeBuild.PipelineProject(this, 'BuildBilderBuilderProject', {
+        projectName: 'BuildBilderBuilderProject'
+      })
     })
   }
 
