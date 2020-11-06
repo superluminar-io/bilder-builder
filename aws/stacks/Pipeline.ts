@@ -65,7 +65,7 @@ export class BilderBuilderPipelineStack extends Stack {
 
     new CfnNotificationRule(this, 'NotifySlack', {
       name: 'bilderbuilder-pipelinte-notifications',
-      detailType: 'full',
+      detailType: 'FULL',
       eventTypeIds: [
         'codebuild-project-build-state-succeeded',
         'project-build-state-failed',
