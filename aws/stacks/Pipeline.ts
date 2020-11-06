@@ -72,7 +72,7 @@ export class BilderBuilderPipelineStack extends Stack {
         'project-build-state-in-progress',
         'project-build-state-stopped'
       ],
-      targets: [{ targetType: 'AWSSlackbotSlack', targetAddress: slackChannel.slackChannelConfigurationArn }],
+      targets: [{ targetType: 'AWSChatbotSlack', targetAddress: slackChannel.slackChannelConfigurationArn }],
       resource: buildProject.projectArn
     })
 
