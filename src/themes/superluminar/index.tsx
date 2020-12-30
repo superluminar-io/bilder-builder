@@ -76,7 +76,7 @@ export const Config: ThemeConfig = {
         {
           name: 'Alexander Steppke',
           image: 'https://superluminar.io/images/team/alexander-steppke.jpg',
-          description: 'GCP Certified Professional Cloud Architect, AWS Certified Solutions Architect, Developer Associate and SysOps Administrator, and Cloud Consultant'
+          description: 'GCP Certified Professional Cloud Architect, AWS Certified DevOps Engineer - Professional and Cloud Consultant'
         },
         {
           name: 'Henrik Fricke',
