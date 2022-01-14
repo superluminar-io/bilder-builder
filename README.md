@@ -32,3 +32,7 @@ The Pipeline is triggered automatically for master commits, keeps itself up to d
 The Pipeline uses a Personal Access Token from Alexander Steppke/Miradorn as of 24.7.2020 to access the repository.
 It is stored in AWS Secret Manager under `github-token`.
 The Token needs to be changed if the Owner no longer has access to the Repo.
+
+## Adding your image
+
+Edit [./src/themes/superluminar/index.tsx](./src/themes/superluminar/index.tsx), add your name and add image to [./public/images/team](./public/images/team).
