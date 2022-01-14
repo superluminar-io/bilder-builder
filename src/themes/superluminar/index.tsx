@@ -45,42 +45,42 @@ export const Config: ThemeConfig = {
       values: [
         {
           name: 'Boris Erdmann',
-          image: 'https://superluminar.io/images/team/boris-erdmann.jpg',
+          image: '/images/team/boris-erdmann.jpg',
           description: 'Agile Coach, former CTO & VP Engineering, AWS Certified Developer, and Co-Founder'
         },
         {
           name: 'Hendric Rüsch',
-          image: 'https://superluminar.io/images/team/hendric-ruesch.jpg',
+          image: '/images/team/hendric-ruesch.jpg',
           description: 'Expert for Business Strategies, former Business Development Manager, and Co-Founder'
         },
         {
           name: 'Jan Brauer',
-          image: 'https://superluminar.io/images/team/jan-brauer.jpg',
+          image: '/images/team/jan-brauer.jpg',
           description: 'AWS Certified Solutions Architect, former Engineering Manager, and Co-Founder'
         },
         {
           name: 'Sebastian Müller',
-          image: 'https://superluminar.io/images/team/sebastian-mueller.jpg',
+          image: '/images/team/sebastian-mueller.jpg',
           description: 'AWS Serverless Hero, AWS Certified Solutions Architect, and Senior Cloud Consultant'
         },
         {
           name: 'Soenke Ruempler',
-          image: 'https://superluminar.io/images/team/soenke-ruempler.jpg',
+          image: '/images/team/soenke-ruempler.jpg',
           description: 'AWS APN Ambassador, AWS Certified Solutions Architect - Professional, and Co-Founder'
         },
         {
           name: 'Till Kahlbrock',
-          image: 'https://superluminar.io/images/team/till-kahlbrock.jpg',
+          image: '/images/team/till-kahlbrock.jpg',
           description: 'AWS Certified DevOps Engineer - Professional and Senior Cloud Consultant'
         },
         {
           name: 'Alexander Steppke',
-          image: 'https://superluminar.io/images/team/alexander-steppke.jpg',
+          image: '/images/team/alexander-steppke.jpg',
           description: 'GCP Certified Professional Cloud Architect, AWS Certified DevOps Engineer - Professional and Cloud Consultant'
         },
         {
           name: 'Henrik Fricke',
-          image: 'https://superluminar.io/images/team/henrik-fricke.jpg',
+          image: '/images/team/henrik-fricke.jpg',
           description: 'Cloud Consultant'
         },
       ]
