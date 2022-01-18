@@ -83,6 +83,11 @@ export const Config: ThemeConfig = {
           image: '/images/team/henrik-fricke.jpg',
           description: 'Cloud Consultant'
         },
+        {
+          name: 'Rebecca Burnside',
+          image: '/images/team/rebecca-burnside.jpg',
+          description: 'Cloud Consultant'
+        },
       ]
     }
   ]
